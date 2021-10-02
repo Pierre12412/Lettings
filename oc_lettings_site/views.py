@@ -12,4 +12,4 @@ from lettings.models import Letting
 # pellentesque iaculis enim cursus in. Praesent volutpat porttitor magna,
 # non finibus neque cursus id.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'oc_lettings_site/index.html')
