@@ -1,10 +1,8 @@
 version: 2.1
 jobs:
   build:
-    environment:
-      IMAGE_NAME: pierre124/dockerhub
     docker:
-      - image: circleci/python:3.9
+      - image: pierre124/dockerhub:latest
     steps:
       - checkout
       - restore_cache:
