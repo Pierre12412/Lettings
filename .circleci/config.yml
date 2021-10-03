@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/python@sha256:6e2a6d302742253b338391e1bc26ee9a6acf63f8a419a0adee4883d6b134578a
+      - image: cimg/python@sha256:6e2a6d302742253b338391e1bc26ee9a6acf63f8a419a0adee4883d6b134578a:myfirstimagepush
     steps:
       - checkout
       - restore_cache:
