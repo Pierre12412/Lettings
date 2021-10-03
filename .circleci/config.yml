@@ -1,8 +1,10 @@
 version: 2.1
 jobs:
   build:
+    environment:
+      IMAGE_NAME: pierre124/dockerhub
     docker:
-      - image: cimg/python@sha256:6e2a6d302742253b338391e1bc26ee9a6acf63f8a419a0adee4883d6b134578a:latest
+      - image: circleci/python:3.9
     steps:
       - checkout
       - restore_cache:
