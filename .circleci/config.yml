@@ -8,6 +8,8 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.6
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
@@ -21,25 +23,17 @@ jobs:
           paths:
             - "venv"
       - run:
-          name: Install Docker
-          command: |
-            apt-get update
-            apt-get install --no-install-recommends -y sudo
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends docker-ce docker-ce-cli containerd.io
-            docker run hello-world
-      - run:
           name: Running tests
           command: |
             . venv/bin/activate
             pytest
-      - setup_remote_docker:
-          version: 20.10.6
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push pierre124/dockerhub:latest
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker build -t pierre124/dockerhub:$TAG
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker push pierre124/dockerhub:$TAG
       - store_artifacts:
           path: test-reports/
           destination: python_app
