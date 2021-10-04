@@ -28,7 +28,7 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-            docker tag pushing 0.0.0.0:8000/pierre124/dockerhub:latest
+            docker tag pierre124/dockerhub 0.0.0.0:8000/pierre124/dockerhub:latest
             docker push pierre124/dockerhub:latest
       - store_artifacts:
           path: test-reports/
