@@ -26,15 +26,9 @@ jobs:
             pytest
       - setup_remote_docker:
           version: 20.10.6
-      - run: apt-get install -y sudo
-      - run: ls -al /bin/sh && sudo rm /bin/sh && sudo ln -s /bin/bash /bin/sh && ls -al /bin/sh
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
-            sudo apt-get update
-            sudo apt-get install curl
-            curl -fsSL https://get.docker.com/ | sh
-            sudo usermod -aG docker pierre124
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             IMAGE_TAG=${CIRCLE_TAG/v/''}
             docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
