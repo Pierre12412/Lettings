@@ -2,10 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: pierre124/dockerhub:latest
-        auth:
-          username: pierre124
-          password: $DOCKERHUB_PASSWORD
+      - image: circleci/python:3.9
     steps:
       - checkout
       - setup_remote_docker:
