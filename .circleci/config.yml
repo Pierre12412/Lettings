@@ -27,6 +27,15 @@ jobs:
       - setup_remote_docker:
           version: 20.10.6
       - run:
+          name: Install docker
+          command: |
+            apt-get update
+            apt-get install -y sudo
+            sudo apt-get install -y linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
+            sudo apt-get install docker-engine -y
+            sudo service docker start
+            sudo docker run hello-world
+      - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
