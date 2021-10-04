@@ -15,7 +15,7 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 
 ### macOS / Linux
 
-#### Cloner le repository
+##### Cloner le repository
 
 - `cd /path/to/put/project/in`
 - `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
