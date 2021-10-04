@@ -1,13 +1,8 @@
 version: 2.1
-executors:
-  docker-publisher:
-    environment:
-      IMAGE_NAME: pierre124/dockerhub
-    docker:
-      - image: pierre124/dockerhub:latest
 jobs:
   build:
-    executor: docker-publisher
+    docker:
+      - image: pierre124/dockerhub:latest
     steps:
       - checkout
       - restore_cache:
@@ -17,11 +12,6 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - setup_remote_docker
-      - run:
-          name: Build Docker image
-          command: |
-            docker build -t $IMAGE_NAME:latest .
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
@@ -31,32 +21,16 @@ jobs:
           command: |
             . venv/bin/activate
             pytest
+      - setup_remote_docker
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            IMAGE_TAG=${CIRCLE_TAG/v/''}
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:latest
+            docker push $IMAGE_NAME:$IMAGE_TAG
       - store_artifacts:
           path: test-reports/
           destination: python_app
-    publish-latest:
-      executor: docker-publisher
-      steps:
-        - setup_remote_docker
-        - run:
-            name: Load archived Docker image
-            command: docker load -i /tmp/workspace/image.tar
-        - run:
-            name: Publish Docker Image to Docker Hub
-            command: |
-              echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-              docker push $IMAGE_NAME:latest
-workflows:
-  version: 2.1
-  build-master:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-      - publish-latest:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+
