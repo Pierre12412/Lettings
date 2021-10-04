@@ -5,8 +5,6 @@ jobs:
       - image: circleci/python:3.9
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.6
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run:
@@ -24,6 +22,16 @@ jobs:
           command: |
             . venv/bin/activate
             pytest
+      - store_artifacts:
+          path: test-reports/
+          destination: python_app
+  container:
+    docker:
+      - image: circleci/python:3.9
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.6
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
@@ -31,9 +39,6 @@ jobs:
             docker build --tag dockerhub .
             docker tag dockerhub pierre124/dockerhub
             docker push pierre124/dockerhub
-      - store_artifacts:
-          path: test-reports/
-          destination: python_app
 
 orbs:
   heroku: circleci/heroku@0.0.10
@@ -41,9 +46,16 @@ workflows:
   build_app:
     jobs:
       - build
-      - heroku/deploy-via-git:
+      - container:
           requires:
             - build
+            filters:
+              branches:
+                only:
+                  - main
+      - heroku/deploy-via-git:
+          requires:
+            - container
           filters:
             branches:
               only:
