@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: pierre124/dockerhub:latest
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - restore_cache:
@@ -21,7 +24,9 @@ jobs:
           command: |
             . venv/bin/activate
             pytest
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.6
+          docker_layer_caching: true
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
