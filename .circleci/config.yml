@@ -22,7 +22,7 @@ jobs:
             - "venv"
       -run:
           name: Install Docker
-          command:
+          command: |
             apt-get update
             apt-get install --no-install-recommends -y sudo
             sudo apt-get update
