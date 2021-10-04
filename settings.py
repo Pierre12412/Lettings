@@ -2,9 +2,6 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
 
 sentry_sdk.init(
     dsn=os.environ.get('DSN'),
@@ -28,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY",'xxxx')
+SECRET_KEY = os.environ.get("SECRET_KEY", 'xxxx')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -130,5 +127,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
