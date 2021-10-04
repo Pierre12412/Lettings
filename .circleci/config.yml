@@ -49,10 +49,10 @@ workflows:
       - container:
           requires:
             - build
-            filters:
-              branches:
-                only:
-                  - main
+          filters:
+            branches:
+              only:
+                - main
       - heroku/deploy-via-git:
           requires:
             - container
