@@ -31,6 +31,7 @@ jobs:
             docker build --tag dockerhub .
             docker tag dockerhub pierre124/dockerhub
             docker push pierre124/dockerhub
+            docker run --publish 8000:8000 python-django
       - store_artifacts:
           path: test-reports/
           destination: python_app
