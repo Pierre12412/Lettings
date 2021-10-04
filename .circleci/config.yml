@@ -30,6 +30,7 @@ jobs:
             echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
             docker build --tag dockerhub .
             docker tag dockerhub pierre124/dockerhub
+            docker create --publish 8000:8000 pierre124/dockerhub
             docker push pierre124/dockerhub
       - store_artifacts:
           path: test-reports/
