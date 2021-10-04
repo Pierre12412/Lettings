@@ -28,8 +28,8 @@ jobs:
           name: Publish Docker Image to Docker Hub
           command: |
             echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-            docker tag dockerhub:latest localhost.com:8000/pierre124/dockerhub:latest
-            docker push localhost.com:5000/pierre124/dockerhub:latest
+            docker build --tag python-django .
+            docker push python-django
       - store_artifacts:
           path: test-reports/
           destination: python_app
