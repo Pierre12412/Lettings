@@ -31,7 +31,6 @@ jobs:
           command: |
             apt-get update
             apt-get install -y sudo
-            sudo apt-get install -y linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
             sudo apt-get install docker-engine -y
             sudo service docker start
             sudo docker run hello-world
