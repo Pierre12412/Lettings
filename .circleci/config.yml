@@ -34,4 +34,10 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
+orbs:
+  heroku: circleci/heroku@0.0.10
+workflows:
+  heroku_deploy:
+    jobs:
+      - heroku/deploy-via-git
 
