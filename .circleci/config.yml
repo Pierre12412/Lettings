@@ -43,4 +43,7 @@ workflows:
   heroku_deploy:
     jobs:
       - heroku/deploy-via-git
+      - run:
+          command : |
+            heroku ps:scale web=1
 
