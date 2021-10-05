@@ -1,5 +1,8 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+
+import settings
 from . import views
 
 
@@ -14,4 +17,4 @@ urlpatterns = [
     path('', include('profiles.urls', namespace='profiles')),
     path('admin/', admin.site.urls),
     path('sentry-debug/', trigger_error),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
