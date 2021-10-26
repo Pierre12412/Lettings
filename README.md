@@ -69,14 +69,14 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - Aller sur `http://localhost:8000/admin`
 - Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
 
-### Windows
+#### Windows
 
 Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
 
-### Déploiement
+#### Déploiement
 
 Le déploiement du site se fait via un Pipeline CircleCI : https://app.circleci.com/pipelines/github/Pierre12412
 Les changements sur GitHub sont détéctés et le pipeline s'active en effectuant les actions suivantes dans cet ordre :
@@ -85,7 +85,7 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 - Si le build réussit : La nouvelle image de l'application est publiée à Docker Hub : https://hub.docker.com/repository/docker/pierre124/dockerhub
 - Si la publication est réussie : heroku déploie l'application via git : https://oc-lettings-8.herokuapp.com/
 
-### Configurations Requises :
+#### Configurations Requises :
 - Les requirements avec un environnement virtuel Python 3.9
 - Git fonctionnel vers le repo de l'application
 - Le fichier .circleci avec à l'intérieur la config.yml du pipeline
@@ -104,7 +104,7 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 	-DSN (clé pour Sentry)
 	-SECRET_KEY (clé secrète Django)
 
-### Etapes nécessaires:
+#### Etapes nécessaires:
 
 1 - Créer tout les fichiers nécessaires avec :
 	-Dans .circleci le fichier config.yml ci-dessous, remplacer <nom-app-dockerhub> par le nom de votre application DockerHub
