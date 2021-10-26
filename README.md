@@ -106,12 +106,12 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 
 #### Etapes nécessaires:
 
-1 - Créer tout les fichiers nécessaires avec :  
-	- Dans **.circleci** le fichier **config.yml** ci-dessous, remplacer *<nom-app-dockerhub>* par le nom de votre application DockerHub  
-	- Dans **Procfile** (sans extension, espaces importants, sans guillemets):  
+1 - Créer tout les fichiers nécessaires avec :   
+*	 Dans **.circleci** le fichier **config.yml** ci-dessous, remplacer *<nom-app-dockerhub>* par le nom de votre application DockerHub  
+*	 Dans **Procfile** (sans extension, espaces importants, sans guillemets):  
 		```web: gunicorn wsgi:application```  
-	- Dans **Dockerfile** les lignes de code ci-dessous  
-	- Dans **.dockerignore** : */venv  
+*	 Dans **Dockerfile** les lignes de code ci-dessous  
+*	 Dans **.dockerignore** : */venv  
 
 2- Créer un compte Sentry, créer un projet django, dans les paramètres récupérer le Security Token (variable environnement virtuel DSN Heroku)
 
@@ -127,7 +127,7 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 
 8- Vérifier que le Pipeline s'est bien executé
 
-9- Aller sur le site de l'application : https://<nameapp>.herokuapp.com/
+9- Aller sur le site de l'application : **https://\<nameapp\>.herokuapp.com/**
 
 
 
