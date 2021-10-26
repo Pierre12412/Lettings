@@ -88,9 +88,9 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 #### Configurations Requises :
 - Les requirements avec un environnement virtuel Python 3.9
 - Git fonctionnel vers le repo de l'application
-- Le fichier .circleci avec à l'intérieur la config.yml du pipeline
-- Les fichiers .dockerignore et Dockerfile pour la création de la nouvelle image
-- Le fichier Procfile pour le déploiement sur Heroku
+- Le fichier **.circleci** avec à l'intérieur la config.yml du pipeline
+- Les fichiers **.dockerignore** et **Dockerfile** pour la création de la nouvelle image
+- Le fichier **Procfile** pour le déploiement sur Heroku
 - GitHub connecté à CircleCI
 - L'application Heroku créée en amont
 
@@ -100,26 +100,26 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 	- HEROKU_API_KEY
 	- HEROKU_APP_NAME --> Connexion à Heroku
 
-- Les variables suivantes dans les variables d'environnement de l'application Heroku :
-	-DSN (clé pour Sentry)
-	-SECRET_KEY (clé secrète Django)
+- Les variables suivantes dans les variables d'environnement de l'application Heroku :  
+	- DSN (clé pour Sentry)
+	- SECRET_KEY (clé secrète Django)
 
 #### Etapes nécessaires:
 
-1 - Créer tout les fichiers nécessaires avec :
-	-Dans .circleci le fichier config.yml ci-dessous, remplacer <nom-app-dockerhub> par le nom de votre application DockerHub
-	-Dans Procfile (sans extension, espaces importants, sans guillemets): 
-		"web: gunicorn wsgi:application"
-	-Dans Dockerfile les lignes de code ci-dessous
-	-Dans .dockerignore : */venv
+1 - Créer tout les fichiers nécessaires avec :  
+	- Dans **.circleci** le fichier **config.yml** ci-dessous, remplacer *<nom-app-dockerhub>* par le nom de votre application DockerHub  
+	- Dans **Procfile** (sans extension, espaces importants, sans guillemets):  
+		```web: gunicorn wsgi:application```  
+	- Dans **Dockerfile** les lignes de code ci-dessous  
+	- Dans **.dockerignore** : */venv  
 
-2- Créer un compte Sentry, créer un projet django, dans les paramètres récupérer le Security Token (pour la suite --> variable environnement virtuel DSN Heroku)
+2- Créer un compte Sentry, créer un projet django, dans les paramètres récupérer le Security Token (variable environnement virtuel DSN Heroku)
 
 3- Créer l'application Heroku avec les variables d'environnement nécessaires et associer GitHub
 
 4- Connecter CircleCI à Github
 
-5- Dans les Projects CircleCI lancer Set Up Project et sélectionner la branche du repo du projet avec le config.yml
+5- Dans les Projects CircleCI lancer Set Up Project et sélectionner la branche du repo du projet avec le **config.yml**
 
 6- Dans CircleCI, entrer les variables d'environnement nécessaires (assurez vous d'avoir l'accès au DockerHub et à Heroku)
 
@@ -132,7 +132,7 @@ Les changements sur GitHub sont détéctés et le pipeline s'active en effectuan
 
 
 
--------------------------- Config.yml ---------------------------------
+-------------------------- config.yml ---------------------------------
 ```
 version: 2.1
 jobs:
